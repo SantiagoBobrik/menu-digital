@@ -1,0 +1,34 @@
+{
+  "companyId": 14,
+  "nombre": "Cervelar",
+  "url-profile": "www.google.com",
+  "url-profile-header": "www.google.com",
+  "description": "Este es mi negocio",
+  "colorPrimario": "#asfasf",
+  "colroSecundario": "#asfasf",
+  "carta": {
+    "promo": {
+      "name": "Papas con chedar",
+      "precioOriginal": 140,
+      "precioOferta": 120,
+      "descuento": 30
+    },
+    "productos": [
+      {
+        "categoria": {
+          "nombre": "bebidas",
+          "productos": [
+            {
+              "nombre": "Empanada",
+              "descripcion": "La mejor empanada del mundo",
+              "precios": [
+                { "descripcion": "JYQ", "precio": 140 },
+                { "descripcion": "CARNE", "precio": 180 }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
