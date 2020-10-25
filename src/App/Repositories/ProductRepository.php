@@ -1,15 +1,12 @@
 <?php
 
-namespace App\Repository;
-
-use App\Repository\RepositoryInterface;
-
+namespace App\Repositories;
 
 
 class ProductRepository implements RepositoryInterface
 {
 
-    public function all()
+    public static  function all()
     {
     }
 

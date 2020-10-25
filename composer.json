@@ -3,7 +3,8 @@
     "slim/slim": "4.*",
     "slim/psr7": "^1.2",
     "php-di/php-di": "^6.2",
-    "illuminate/database": "^7.28"
+    "illuminate/database": "^7.28",
+    "ext-json": "*"
   },
   "autoload": {
     "psr-4": {
