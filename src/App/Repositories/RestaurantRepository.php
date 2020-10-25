@@ -15,12 +15,13 @@ class RestaurantRepository implements RepositoryInterface
     public static function findById($id)
     {
 
-        $restaurant = Restaurant::find($id);
+        try {
+            return Restaurant::findOrFail($id);
+        } catch (\Exception $exception) {
 
-        if (is_null($restaurant))
             throw new \Exception("Restaurant Not Found", 404);
 
-        return $restaurant;
+        }
 
     }
 
@@ -33,35 +34,36 @@ class RestaurantRepository implements RepositoryInterface
             return $newRestaurant->save();
         } catch (\Exception $e) {
 
-            throw new \Exception("Create Restaurant Error", 400);
+            throw new \Exception("Create Restaurant Error", 404);
         }
 
     }
 
     public static function update(array $data, $id)
     {
-        $restaurant = self::findById($id);
-        if (is_null($restaurant)) {
-            throw new \Exception("Restaurant Not Found", 404);
-        }
-
         try {
+            $restaurant = Restaurant::findOrFail($id);
             $restaurant->name = isset($data['name']) ? $data['name'] : null;
             $restaurant->user_id = isset($data['user_id']) ? $data['user_id'] : null;
             return $restaurant->save();
 
         } catch (\Exception $e) {
+
             throw new \Exception("Update Restaurant Error", 400);
         }
     }
 
     public static function delete($id)
     {
-        $restaurant = Restaurant::find($id);
+        try {
 
-        if (is_null($restaurant)) throw new \Exception("Restaurant Not Found", 404);
+            return Restaurant::findOrFail($id)->delete();
 
-        return $restaurant->delete();
+        } catch (\Exception $exception) {
+
+            throw new \Exception("Restaurant Not Found", 404);
+
+        }
 
 
     }
