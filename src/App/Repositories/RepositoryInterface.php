@@ -1,19 +1,18 @@
 <?php
 
 
-
-namespace App\Repository;
+namespace App\Repositories;
 
 interface RepositoryInterface
 {
 
-    public function all();
+    public static function all();
 
-    public function create(array  $data);
+    public static function create(array $data);
 
-    public function update(array $data, $id);
+    public static function update(array $data, $id);
 
-    public function delete($id);
+    public static function delete($id);
 
-    public function find($id);
+    public static function findById($id);
 }

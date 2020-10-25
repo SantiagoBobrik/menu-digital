@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 class JsonResponse
 {
 
-    private static $statusCode = [200, 201, 401, 403, 404, 500, 503];
+    private static $statusCode = [200, 201,400, 401,  403, 404, 500, 503];
 
     public static function withJson(
         Response $response,
@@ -27,6 +27,13 @@ class JsonResponse
             ->withStatus($status);
     }
 
+
+    public static function getBody($request)
+    {
+
+        return json_decode($request->getBody());
+    }
+
     private static function makeResponseMessage($status, $data)
     {
 
@@ -35,6 +42,9 @@ class JsonResponse
                 return $data ? json_encode($data) : self::makeObjectSuccess("Success");
             case 201:
                 return $data ? json_encode($data) : self::makeObjectSuccess("Created");
+            case 400:
+                $message = $data ? $data : "Bad Request";
+                return self::makeObjectResponseMessage($message);
             case 401:
                 $message = $data ? $data : "Unauthorized";
                 return self::makeObjectResponseMessage($message);
