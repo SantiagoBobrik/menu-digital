@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 class JsonResponse
 {
 
-    private static $statusCode = [200, 201, 204, 400, 401, 403, 404, 500, 503];
+    const  STATUS_CODES = [200, 201, 204, 400, 401, 403, 404, 500, 503];
 
     public static function withJson(
         Response $response,
@@ -28,12 +28,6 @@ class JsonResponse
     }
 
 
-    public static function getBody($request)
-    {
-
-        return json_decode($request->getBody());
-    }
-
     private static function makeResponseMessage($status, $data)
     {
 
@@ -45,23 +39,17 @@ class JsonResponse
             case 204:
                 return $data ? json_encode($data) : self::makeObjectSuccess("No content");
             case 400:
-                $message = $data ? $data : "Bad Request";
-                return self::makeObjectResponseMessage($message);
+                return self::makeObjectResponseMessage($data ? $data : "Bad Request");
             case 401:
-                $message = $data ? $data : "Unauthorized";
-                return self::makeObjectResponseMessage($message);
+                return self::makeObjectResponseMessage($data ? $data : "Unauthorized");
             case 403:
-                $message = $data ? $data : "Forbidden";
-                return self::makeObjectResponseMessage($message);
+                return self::makeObjectResponseMessage($data ? $data : "Forbidden");
             case 404:
-                $message = $data ? $data : "Not Found";
-                return self::makeObjectResponseMessage($message);
+                return self::makeObjectResponseMessage($data ? $data : "Not Found");
             case 500:
-                $message = $data ? $data : "Server Error";
-                return self::makeObjectResponseMessage($message);
+                return self::makeObjectResponseMessage($data ? $data : "Server Error");
             case 503:
-                $message = $data ? $data : "Service Unavailable";
-                return self::makeObjectResponseMessage($message);
+                return self::makeObjectResponseMessage($data ? $data : "Service Unavailable");
         }
 
     }
@@ -73,7 +61,7 @@ class JsonResponse
     }
 
 
-    private static function makeObjectSuccess($message)
+    private  function makeObjectSuccess($message)
     {
         return json_encode(["message" => $message, "timestamp" => date("h:i:sa")]);
     }
@@ -81,7 +69,7 @@ class JsonResponse
     private static function validateStatusCode($status)
     {
 
-        if (!in_array($status, self::$statusCode))
+        if (!in_array($status, self::STATUS_CODES))
             return 200;
 
         return $status;

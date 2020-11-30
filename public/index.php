@@ -32,6 +32,7 @@ require  __DIR__. '/../src/App/Middlewares/ExceptionMiddleware.php';
 /* ----------------------------- Get Routes ------------------------------------- */
 require __DIR__ . '/../src/App/Routes/productRoutes.php';
 require __DIR__ . '/../src/App/Routes/restaurantRoutes.php';
+require __DIR__ . '/../src/App/Routes/categoryRoutes.php';
 
 
 
