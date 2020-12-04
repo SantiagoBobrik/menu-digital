@@ -9,14 +9,13 @@ use Psr\Http\Message\ResponseInterface as Response;
 class JsonResponse
 {
 
-    const  STATUS_CODES = [200, 201, 204, 400, 401, 403, 404, 500, 503];
+    private static   $STATUS_CODES = [200, 201, 204, 400, 401, 403, 404, 500, 503];
 
     public static function withJson(
         Response $response,
         $status = 200,
         $data = null
-    )
-    {
+    ) {
 
         $status = self::validateStatusCode($status);
         $dataResponse = self::makeResponseMessage($status, $data);
@@ -30,6 +29,8 @@ class JsonResponse
 
     private static function makeResponseMessage($status, $data)
     {
+
+
 
         switch ($status) {
             case 200:
@@ -51,7 +52,6 @@ class JsonResponse
             case 503:
                 return self::makeObjectResponseMessage($data ? $data : "Service Unavailable");
         }
-
     }
 
 
@@ -61,7 +61,7 @@ class JsonResponse
     }
 
 
-    private  function makeObjectSuccess($message)
+    private static  function makeObjectSuccess($message)
     {
         return json_encode(["message" => $message, "timestamp" => date("h:i:sa")]);
     }
@@ -69,7 +69,7 @@ class JsonResponse
     private static function validateStatusCode($status)
     {
 
-        if (!in_array($status, self::STATUS_CODES))
+        if (!in_array($status, static::$STATUS_CODES))
             return 200;
 
         return $status;

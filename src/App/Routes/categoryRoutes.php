@@ -3,5 +3,6 @@
 
 $app->group("/categories", function ($app) {
 
-    $app->get('', 'CategoryController:test');
+    $app->post('', 'CategoryController:createCategory');
+    $app->put('/{categoryId}', 'CategoryController:updateCategory');
 });
