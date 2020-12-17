@@ -30,4 +30,9 @@ class CategoryController
         CategoryRespository::create($request->getParsedBody());
         return JsonResponse::withJson($response, 200);
     }
+    public function deleteCategory($request =  null, $response = null, array $args = null)
+    {
+        CategoryRespository::delete($args['categoryId']);
+        return JsonResponse::withJson($response, 200);
+    }
 }

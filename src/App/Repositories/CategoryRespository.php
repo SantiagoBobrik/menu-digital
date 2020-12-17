@@ -56,7 +56,8 @@ class CategoryRespository implements RepositoryInterface
 
     public static function delete($id)
     {
-        // TODO: Implement delete() method.
+        $category =   self::findById($id);
+        $category->delete();
     }
 
 
